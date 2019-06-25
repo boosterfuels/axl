@@ -1,0 +1,12 @@
+{
+  "name": "axl",
+  "version": "0.1.0",
+  "devDependencies": {
+    "mocha": "6.x",
+    "nyc": "14.x"
+  },
+  "scripts": {
+    "coverage": "nyc npm test",
+    "test": "mocha test/*.test.js"
+  }
+}
