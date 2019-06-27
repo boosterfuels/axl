@@ -50,6 +50,21 @@ class Stream {
     return s
   }
 
+  asPromise (check) {
+    return new Promise((resolve, reject) => {
+      const unsub = this.filter(v => check(v)).subscribe({
+        next: v => {
+          resolve(v)
+          unsub()
+        },
+        error: err => {
+          reject(err)
+          unsub()
+        }
+      })
+    })
+  }
+
   subscribe (handlers) {
     if (typeof handlers === 'function') {
       throw new Error('handlers must be an object')

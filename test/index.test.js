@@ -133,4 +133,17 @@ describe('Stream', function() {
       new Stream().subscribe(v => v)
     }, /must be an object/)
   })
-});
+
+  it('asPromise', async function () {
+    const stream = new Stream()
+
+    const p = stream.asPromise(v => v >= 0)
+
+    stream.next(-1)
+    stream.next(1)
+    stream.next(-2)
+    stream.next(2)
+
+    assert.equal(await p, 1)
+  })
+})
